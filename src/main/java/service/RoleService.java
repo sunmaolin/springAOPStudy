@@ -1,4 +1,4 @@
-package beforeStudyGame;
+package service;
 
 import pojo.Role;
 
