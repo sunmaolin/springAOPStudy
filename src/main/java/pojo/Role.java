@@ -5,6 +5,14 @@ public class Role {
     private String roleName;
     private String note;
 
+    public Role() {
+    }
+
+    public Role(int roleId, String roleName) {
+        this.roleId = roleId;
+        this.roleName = roleName;
+    }
+
     public int getRoleId() {
         return roleId;
     }
