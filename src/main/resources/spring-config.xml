@@ -7,9 +7,26 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-
-    <context:component-scan base-package="service,aspectConfig"/>
+    <!--注释掉，使用纯xml配置-->
+    <!--<context:component-scan base-package="service,aspectConfig"/>-->
     <!--与aopConfig注解@EnableAspectJAutoProxy相同-->
     <aop:aspectj-autoproxy/>
+    <bean class="xmlAop.service.impl.RoleServiceImpl"/>
+    <bean id="xmlAspect" class="xmlAop.aspectConfig.RoleAspect"/>
+    <aop:config>
+        <!--引用xmlAspect作为切面-->
+        <aop:aspect ref="xmlAspect">
+            <!--定义切点-->
+            <aop:pointcut id="print" expression="execution(* xmlAop.service.impl.RoleServiceImpl.printRole(..))"/>
+            <!--定义通知   before添加通知参数-->
+            <aop:before method="before" pointcut="execution(* xmlAop.service.impl.RoleServiceImpl.printRole(..)) and args(role)"/>
+            <aop:after-returning method="afterReturning" pointcut-ref="print"/>
+            <aop:after-throwing method="afterThrowing" pointcut-ref="print"/>
+            <aop:after method="after" pointcut-ref="print"/>
+            <aop:around method="around" pointcut-ref="print"/>
+            <!--引入,这里就不写了，与注解一样-->
+            <!--<aop:declare-parents types-matching="...+" implement-interface="" default-impl=""/>-->
+        </aop:aspect>
+    </aop:config>
 
 </beans>
