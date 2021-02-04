@@ -3,6 +3,7 @@ package aspectConfig;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
+import pojo.Role;
 
 /**
  * 创建切面
@@ -74,6 +75,16 @@ public class RoleAspect {
             throwable.printStackTrace();
         }
         System.out.println("aroundAfter..");
+    }
 
+    /**
+     * 测试通知添加参数
+     * args参数上面有写，只拦截该参数为args的方法
+     * @param role
+     */
+    @Before("execution(* service.impl.RoleServiceImpl.printRole(..)) && args(role,sort)")
+    public void beforeByArgs(Role role,int sort){
+        System.out.println("beforeRoleId:"+role.getRoleId());
+        System.out.println("beforeSort:"+sort);
     }
 }

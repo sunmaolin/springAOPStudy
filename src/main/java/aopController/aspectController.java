@@ -17,7 +17,8 @@ public class aspectController {
 //        ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
         RoleService roleService = context.getBean(RoleService.class);
         Role role = new Role(1,"孙茂林");
-        roleService.printRole(role);
+//        roleService.printRole(role);
+        roleService.printRole(role,1);
         //测试异常
 //        role = null;
 //        roleService.printRole(role);
