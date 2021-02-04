@@ -15,7 +15,8 @@
     <bean id="xmlAspect" class="xmlAop.aspectConfig.RoleAspect"/>
     <aop:config>
         <!--引用xmlAspect作为切面-->
-        <aop:aspect ref="xmlAspect">
+        <!--order多个切面时，指定执行顺序-->
+        <aop:aspect ref="xmlAspect" order="1">
             <!--定义切点-->
             <aop:pointcut id="print" expression="execution(* xmlAop.service.impl.RoleServiceImpl.printRole(..))"/>
             <!--定义通知   before添加通知参数-->

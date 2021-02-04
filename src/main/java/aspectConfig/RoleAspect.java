@@ -2,6 +2,7 @@ package aspectConfig;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import pojo.Role;
 import verifier.RoleVerifier;
@@ -32,8 +33,16 @@ import verifier.impl.RoleVerifierImpl;
  */
 //Aspect注解说明这是一个切面
 @Aspect
+//当同一个切点存在多个切面时，该注解会指定执行顺序
+//或者实现接口Ordered 重写getOrder方法，看下面注释掉的代码
+@Order(1)
 @Component
-public class RoleAspect {
+public class RoleAspect /*implements Ordered*/ {
+
+//    @Override
+//    public int getOrder() {
+//        return 0;
+//    }
 
     /**
      * 在切面引入一个校验属性
