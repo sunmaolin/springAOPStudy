@@ -19,7 +19,7 @@ public class aspectController {
         Role role = new Role(1,"孙茂林");
         roleService.printRole(role);
         //测试异常
-        role = null;
-        roleService.printRole(role);
+//        role = null;
+//        roleService.printRole(role);
     }
 }

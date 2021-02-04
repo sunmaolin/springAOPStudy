@@ -1,5 +1,6 @@
 package aspectConfig;
 
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
@@ -57,5 +58,22 @@ public class RoleAspect {
     @AfterThrowing("print()")
     public void afterThrowing(){
         System.out.println("afterThrowing...");
+    }
+
+    /**
+     * 测试环绕通知
+     * 测试可知：环绕通知是在before通知之前，after通知之后
+     * @param jp
+     */
+    @Around("print()")
+    public void around(ProceedingJoinPoint jp){
+        System.out.println("aroundBefore...");
+        try {
+            jp.proceed();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        System.out.println("aroundAfter..");
+
     }
 }
