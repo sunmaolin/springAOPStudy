@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pojo.Role;
 import service.RoleService;
 import service.impl.RoleServiceImpl;
+import verifier.RoleVerifier;
 
 /**
  * 测试切面，切点的控制器
@@ -17,8 +18,13 @@ public class aspectController {
 //        ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
         RoleService roleService = context.getBean(RoleService.class);
         Role role = new Role(1,"孙茂林");
-//        roleService.printRole(role);
-        roleService.printRole(role,1);
+        //测试引入类
+        RoleVerifier roleVerifier = (RoleVerifier) roleService;
+        if(roleVerifier.verifierRole(role)){
+            roleService.printRole(role);
+        }
+//        测试通知添加参数
+//        roleService.printRole(role,1);
         //测试异常
 //        role = null;
 //        roleService.printRole(role);

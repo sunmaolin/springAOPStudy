@@ -4,6 +4,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 import pojo.Role;
+import verifier.RoleVerifier;
+import verifier.impl.RoleVerifierImpl;
 
 /**
  * 创建切面
@@ -32,6 +34,14 @@ import pojo.Role;
 @Aspect
 @Component
 public class RoleAspect {
+
+    /**
+     * 在切面引入一个校验属性
+     * + 定义一个增强类
+     * default 默认实现类
+     */
+    @DeclareParents(value = "service.impl.RoleServiceImpl+",defaultImpl = RoleVerifierImpl.class)
+    public RoleVerifier roleVerifier;
 
     /**
      * 一个个定义太麻烦，可以先定义好一个切点，下面进行引用
